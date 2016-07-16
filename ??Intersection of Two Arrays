@@ -19,3 +19,34 @@ public class Solution {
     }
 }
 //为何要引入set？hashmap可以做吗
+
+
+//第二种做法
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();//只用一个set
+        Arrays.sort(nums1);//注意array后面有个s
+        Arrays.sort(nums2);
+        int i = 0;
+        int j = 0;
+        while(i < nums1.length && j < nums2.length){
+            if (nums1[i] < nums2[j]){
+                i++;
+            }
+            else if (nums1[i] > nums2[j]){ //注意要写else，原因不太明白
+                j++;
+            }
+            else if (nums1[i] == nums2[j]){
+                set.add(nums1[i]); //找到了相同项，放到set里
+                i++;
+                j++;
+            }
+        }
+        int []result = new int[set.size()];//把set转换成array
+        int k = 0;
+        for (Integer num : set){
+            result[k++] = num;
+        }
+        return result;
+    }
+}
