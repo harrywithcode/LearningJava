@@ -1,0 +1,80 @@
+public class Solution { //第一种方法，排序法
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i = 0;
+        int j = 0;
+        ArrayList<Integer> myList = new ArrayList<Integer>();  //动态数组
+        while ( i < nums1.length && j < nums2.length){
+            if (nums1[i] < nums2[j]){
+                i++;
+            }
+            else if (nums1[i] > nums2[j]){
+                j++;
+            }
+            else if (nums1[i] == nums2[j]){
+                myList.add(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+        int []result = new int[myList.size()];
+        int k = 0;
+        for(Integer num : myList){
+            result[k++] = num;
+        }
+        return result;
+        
+    }
+}
+
+//第二种做法，用HashMap
+//map.put("1","222")， 往一个hash表里放入值。1是key值，222是对应的value
+//map.get(Object key）,通过key值找value
+public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i=0; i<nums1.length; i++){
+            if(map.containsKey(nums1[i])){
+                map.put(nums1[i], map.get(nums1[i])+1);
+            }
+            else{
+                map.put(nums1[i], 1);
+            }
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0; i<nums2.length; i++){
+            if(map.containsKey(nums2[i]) && map.get(nums2[i])>0){
+                list.add(nums2[i]);
+                map.put(nums2[i], map.get(nums2[i])-1);
+            }
+        }
+        int index = 0;
+        int[] result = new int[list.size()];
+        for(Integer i:list){
+            result[index++] = i;
+        }
+        return result;
+    }
+    
+    //第三种方法
+  //Object getOrDefault(Object key, Object defaultValue),返回map键对应的map值，如果不存在map键，返回默认值
+  public class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0; i < nums1.length; i++){
+            map.put(nums1[i], map.getOrDefault(nums1[i], 0) + 1);
+        }
+        for(int i = 0; i < nums2.length; i++){
+            if(map.containsKey(nums2[i]) && map.get(nums2[i]) > 0){
+                map.put(nums2[i], map.get(nums2[i]) - 1);
+                res.add(nums2[i]);
+            }
+        }
+        int[] r = new int[res.size()];
+        for(int i = 0; i < r.length; i++){
+            r[i] = res.get(i);
+        }
+        return r;
+    }
+}
