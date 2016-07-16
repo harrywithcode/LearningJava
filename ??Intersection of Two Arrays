@@ -1,0 +1,21 @@
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>(); //integer是一个类，不能和int交叉使用
+        Set<Integer> intersect = new HashSet<>(); //HashSet和hash表类似，只不过每个单元里是set
+        for (int i = 0; i < nums1.length; i++){
+            set.add(nums1[i]);
+        }
+        for (int i = 0; i < nums2.length; i++){
+            if (set.contains(nums2[i])){
+                intersect.add(nums2[i]);
+            }
+        }
+        int []result = new int [intersect.size()];
+        int i = 0;
+        for (Integer num:intersect){ //：表示遍历intersect这个set的每一项，由于intersect是个set，而我们最终想得到的结果是array，所以要转化。这里面的integer也是一个类，num是这个类里面的一个对象
+            result[i++] = num;
+        }
+        return result;
+    }
+}
+//为何要引入set？hashmap可以做吗
