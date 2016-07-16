@@ -4,7 +4,7 @@ public class Solution { //第一种方法，排序法
         Arrays.sort(nums2);
         int i = 0;
         int j = 0;
-        ArrayList<Integer> myList = new ArrayList<Integer>();  //动态数组
+        ArrayList<Integer> myList = new ArrayList<Integer>();  //动态数组，不是hashset
         while ( i < nums1.length && j < nums2.length){
             if (nums1[i] < nums2[j]){
                 i++;
@@ -34,18 +34,19 @@ public class Solution { //第一种方法，排序法
 public int[] intersect(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int i=0; i<nums1.length; i++){
-            if(map.containsKey(nums1[i])){
-                map.put(nums1[i], map.get(nums1[i])+1);
+            if(map.containsKey(nums1[i])){    
+            //containsKey(Object key)如果此映射包含指定键的“映射关系”（判断有没有对应关系），则返回 true
+                map.put(nums1[i], map.get(nums1[i])+1);  //只有重复值的情况下，第二个重复的值才会被+1，如果只出现一次，则对应value=1
             }
             else{
                 map.put(nums1[i], 1);
             }
-        }
+        }  //上面这个for循环建立了一个map，内容是nums1的
         List<Integer> list = new ArrayList<Integer>();
         for(int i=0; i<nums2.length; i++){
             if(map.containsKey(nums2[i]) && map.get(nums2[i])>0){
                 list.add(nums2[i]);
-                map.put(nums2[i], map.get(nums2[i])-1);
+                map.put(nums2[i], map.get(nums2[i])-1);  //把刚才的+1又减了
             }
         }
         int index = 0;
