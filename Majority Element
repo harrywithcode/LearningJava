@@ -1,0 +1,74 @@
+//Moore voting algorithm，速度快
+
+public class Solution {
+    public int majorityElement(int[] num) {
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
+        }
+        return major;
+    }
+}
+//count类似于选票的功能，如果count=0，说明之前没有选出那个数字，所以从此刻开始的这个数字开始，再继续统计count。
+//其他情况下，出现一次候选数字，选票就+1，这个候选数字让人失望一次，就-1，如果他的总体个数真的能满足要求（超过半数），那最后+1的次数
+//肯定比失望的次数多
+//从而这个候选数字也可以一直保留下来
+
+//第二种方法，排序法，非常简单且巧妙，速度快
+public class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length/2];
+    }
+}
+//试想一个线段，上面有一个长条在这条线段上左右移动，这个长条由我们想求的相同的那些数组成，长条的长度肯定要长于线段的二分之一
+//所以无论这个长条左右怎么移动，线段的中点上面肯定都覆盖有长条
+
+
+//第三种方法，速度比较慢（个人理解速度慢的原因是因为for循环里面有if，并且if的参数和for循环的参数一样，不想第一种方法，参数不同）
+//用到hash表。因为key和value的对照关系是，key必须是唯一的，value可以是相同的。所以把数组里的数当做key，如果数组里的数出现重复
+//则默认他们都是一个key，但他们对应的value+1，所以value加了几次，就是多出几个重复的key。最后value的值，也就是重复的值超过半数
+//则可以确定超过半数的value对应的key就是我们要得到的数字
+public class Solution {
+  public int majorityElement(int[] nums){
+	  Map<Integer, Integer> myMap = new HashMap<Integer, Integer>();
+	  int result = 0;
+	  for (int i : nums){
+		  if(!myMap.containsKey(i)){
+			  myMap.put(i,1);
+	  	}
+		  else{
+			  myMap.put(i, myMap.get(i) + 1);
+	  	}
+		  if(myMap.get(i)>nums.length/2){
+			  result = i;
+			  break;
+		  }
+	  }
+	return result;
+  }
+}
+
+//第四种做法，位比较法，暂时还没研究这个方法，速度稍慢一点，还凑合
+public class Solution {
+   public int majorityElement(int[] nums) {
+    int[] bit = new int[32];
+    for (int num: nums)
+        for (int i=0; i<32; i++) 
+            if ((num>>(31-i) & 1) == 1)
+                bit[i]++;
+    int ret=0;
+    for (int i=0; i<32; i++) {
+        bit[i]=bit[i]>nums.length/2?1:0;
+        ret += bit[i]*(1<<(31-i));
+    }
+    return ret;
+}
+}
+
