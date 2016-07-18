@@ -19,6 +19,7 @@ public class Solution{
 
 //第二个方法，排序法，排序以后找相连的
 //数组的题经常用到排序，貌似不是最好的做法，但当你没思路的时候，就排序吧！
+//Time complexity: O(N lg N), memory: O(1) - not counting the memory used by sort
 public class Solution{
 	public boolean containsDuplicate(int[] nums) {
         Arrays.sort(nums);
@@ -33,6 +34,7 @@ public class Solution{
 
 //第三个方法，用hashset。这种判断独立性的题，正好和set的唯一性相吻合，即在一个集合（set）中，不能出现重复值。这也和map里的key
 //属性相同，所以也就有了set.contains这个方法
+//Time complexity: O(N), memory: O(N)
 public class Solution{
 	public boolean containsDuplicate(int[] nums) {
     final Set<Integer> distinct = new HashSet<Integer>();//final修饰其实是防止其被重新初始化 也就是被重新new 一个 或者被 = 赋值
