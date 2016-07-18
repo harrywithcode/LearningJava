@@ -1,0 +1,50 @@
+//我的不正确的代码
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        List<Integer> result = new ArrayList<>();
+		Map<Integer, Integer>myMap = new HashMap<Integer, Integer>();
+		int []mark = new int[nums.length];
+		for (int i:nums){
+			if(!myMap.containsKey(i)){
+				myMap.put(i,1);
+			}
+			else{
+				myMap.put(i,myMap.get(i)+1);
+			}
+			if(myMap.get(i) >= k && mark[i] == 0){
+			    result.add(i);
+			    mark[i] = 1;
+			}
+		}
+			
+	return result;
+    }
+}
+
+//一个正确的用bucket sort的
+public List<Integer> topKFrequent(int[] nums, int k) {
+
+	List<Integer>[] bucket = new List[nums.length + 1];
+	Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
+
+	for (int n : nums) {
+		frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+	}
+
+	for (int key : frequencyMap.keySet()) {
+		int frequency = frequencyMap.get(key);
+		if (bucket[frequency] == null) {
+			bucket[frequency] = new ArrayList<>();
+		}
+		bucket[frequency].add(key);
+	}
+
+	List<Integer> res = new ArrayList<>();
+
+	for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
+		if (bucket[pos] != null) {
+			res.addAll(bucket[pos]);
+		}
+	}
+	return res;
+}
