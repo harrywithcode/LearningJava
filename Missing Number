@@ -1,0 +1,29 @@
+//第一种方法，bit-xor
+//和single number那道题有点类似的感觉
+//举个例子一目了然. 0,2,3. 出现问题之前，res的结果都是数组的最后一个数。从出现问题开始算：res = 3^2^1^3^2，结果是1
+//原理是，两个相同数字xor的结果是0.出现问题之前，nums[i]和i异或成0，出现问题以后，nums[i]总是可以和i+1异或成0.只有出现问题的时候
+//那个i没有nums和他异或，所以他就剩下来了。由于最后一个nums[i]，没有对应的i+1可以和他异或（因为到结尾了），所以res ^ i ^ nums[i]最前面
+//加上res
+public class Solution {
+    public int missingNumber(int[] nums) {
+      int res = nums.length;
+      for (int i = 0; i < nums.length; i++){
+        res = res ^ i ^ nums[i];
+      }
+      return res;
+    }
+}
+
+//第二种方法，求和。nums的和-index的和，就是一共出现了多少次错位（错位一次，他们差1）。
+//从最后一位往前找，减去这些出现错位的次数，就是出现错误的地方
+public class Solution {
+    public int missingNumber(int[] nums) {
+      int result = 0;
+	  for (int i = 0; i < nums.length; i++){
+		  result = result + nums[i] - i;
+	  }
+	  return nums.length - result;
+    }
+}
+
+//第三种方法。binary search。当一个给的数组是排序好的时候，查找的最快方法就是binary search
