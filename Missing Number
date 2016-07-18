@@ -27,3 +27,22 @@ public class Solution {
 }
 
 //第三种方法。binary search。当一个给的数组是排序好的时候，查找的最快方法就是binary search
+//Binary search runs in at worst logarithmic time, making O(log n) comparisons, where n is the number of elements in the array
+//using only constant O(1) space.
+public class Solution {
+    public int missingNumber(int[] nums) {
+      int left = 0;
+	  int right = nums.length;
+	  int mid = (left + right)/2;
+	  while (left < right){
+		  mid = (left + right)/2;
+		  if(nums[mid]>mid){
+			  right = mid;
+		  }
+		  else{
+			  left = mid;
+		  }
+	  }
+	  return left;
+    }
+}
