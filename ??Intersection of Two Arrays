@@ -1,6 +1,7 @@
 public class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         Set<Integer> set = new HashSet<>(); //integer是一个类，不能和int交叉使用
+        //Set：一个不包含重复元素的集合。Set的特点和map中的key一样，不能有重复值。也正是因为这个特点，所以可以用set.contains
         Set<Integer> intersect = new HashSet<>(); //HashSet和hash表类似，只不过每个单元里是set
         for (int i = 0; i < nums1.length; i++){
             set.add(nums1[i]);
