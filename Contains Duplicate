@@ -1,0 +1,48 @@
+//自己第一个写出来的，运行速度很慢
+public class Solution{
+	public boolean containsDuplicate(int[] nums) {
+        Map<Integer, Integer>myMap = new HashMap<Integer, Integer>();
+		for(int i : nums){
+			if(!myMap.containsKey(i)){
+				myMap.put(i,1);
+			}
+			else{
+				myMap.put(i, myMap.get(i)+1);
+			}
+			if(myMap.get(i) > 1){
+				return true;
+			}
+		}
+		return false;
+    } 
+}
+
+//第二个方法，排序法，排序以后找相连的
+//数组的题经常用到排序，貌似不是最好的做法，但当你没思路的时候，就排序吧！
+public class Solution{
+	public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for(int ind = 1; ind < nums.length; ind++) {
+            if(nums[ind] == nums[ind - 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+//第三个方法，用hashset。这种判断独立性的题，正好和set的唯一性相吻合，即在一个集合（set）中，不能出现重复值。这也和map里的key
+//属性相同，所以也就有了set.contains这个方法
+public class Solution{
+	public boolean containsDuplicate(int[] nums) {
+    final Set<Integer> distinct = new HashSet<Integer>();//final修饰其实是防止其被重新初始化 也就是被重新new 一个 或者被 = 赋值
+    for(int num : nums) {
+        if(distinct.contains(num)) {
+            return true;
+        }
+        distinct.add(num);//distinct都被final了，为何这里还可以被操作？因为是添加，不是更改或者赋值？
+    }
+    return false;
+}
+}
+此题中的final在   http://www.cnblogs.com/dolphin0520/p/3736238.html 中有讲解
