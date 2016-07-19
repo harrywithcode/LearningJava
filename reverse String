@@ -1,0 +1,12 @@
+//先把string放进array里面，然后用最简单的swap方法
+//我想用stack方法，但是目前还没成功
+public class Solution {
+    public String reverseString(String s) {
+        char[] ss = s.toCharArray();
+        char[] result = new char[ss.length];
+        for (int i = 0; i < ss.length; i++){
+            result[i]=ss[ss.length-i-1];
+        }
+        return new String(result);
+    }
+}
