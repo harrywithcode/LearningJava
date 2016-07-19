@@ -1,0 +1,23 @@
+//判断两个string是否相同。可以转化成判断两个数组是否相等的问题。转化成两个数组以后，可以参考intersection of two array的做法
+//再次说明，排序法是比较有效的一种方法，速度不是最快的，但当你没有思路的时候，记得排序再处理
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()){
+            return false;
+        }
+        if (s.length() == 0 && t.length() == 0){
+            return true;
+        }
+        char[] ss = s.toCharArray();
+        char[] tt = t.toCharArray();
+        Arrays.sort(ss);
+        Arrays.sort(tt);
+        for(int i = 0; i < ss.length; i++){
+            if (ss[i] != tt[i]){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}
