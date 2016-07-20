@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head != null && head.next != null)
+        {
+            ListNode pivot = head;//都是针对ListNode而言的，pivot和frontier相当于两个指针
+            ListNode frontier = null;
+            while (pivot != null && pivot.next != null)
+                {
+                    frontier = pivot.next;//frontier之前是和pivot在一起的，这个操作以后frontier在pivot后面一位，目的是要移动这一位
+                    pivot.next = pivot.next.next;//pivot的下一个数直接跳过原来的pivot.next，也就是刚刚定义的frontier，直接变成再下一位
+                    frontier.next = head;//刚才定义好的frontier，就是我们要移动的那位，让他的后一位是head，变相的把他移动到了最前。
+                    //因为比head还往前的肯定是新head
+                    head = frontier;//最后让这个刚刚诞生的，还来不及起名的新头头frontier，任命他为head。
+                 }
+        }
+    
+        return head;
+    } 
+}
+//所以，经过每次操作，pivot的后一位总能拿到最前面，在frontier移动的同时，pivot间接的也改变了他的绝对位置，相当于一种被迫移动，也就可以
+//从最前面移动到最后面了
