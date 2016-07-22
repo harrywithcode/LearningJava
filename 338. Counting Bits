@@ -5,6 +5,16 @@ public int[] countBits(int num) {
     for (int i=1; i<=num; i++) f[i] = f[i >> 1] + (i & 1);
     return f;
 }
+//或者写成
+public class Solution {
+    public int[] countBits(int num) {
+        int[] result = new int[num+1];
+        for (int i = 1; i <= num; i++){
+            result[i] = result[i/2] + i%2;
+        }
+        return result;
+    }
+}
 
 //第二种思路
 [1] 1
