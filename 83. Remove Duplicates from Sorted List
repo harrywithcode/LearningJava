@@ -1,0 +1,38 @@
+//错误的做法，我自己写的
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        List<ListNode> result = new ArrayList<ListNode>();//ListNode 是一种格式，它的位置应该是List所在的位置。
+        result.add(head);
+        while(head.val == head.next.val){
+            head = head.next;
+        }
+        head=head.next;
+        deleteDuplicates(head);
+        return result;
+    }
+}
+//正确的1
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {//直接在原来的list上面操作的
+        ListNode pointer = head;
+        while(pointer != null && pointer.next != null){
+            if(pointer.val == pointer.next.val){
+                pointer.next = pointer.next.next;
+            }
+            else{
+                pointer = pointer.next;
+            }
+        }
+        return head;//为什么是return head，head代表一个list吗，还是说head只是一个pointer？
+        //在reverse linkedlist里面，也是return head
+        //在invert binary tree里，也是return root
+    }
+}
