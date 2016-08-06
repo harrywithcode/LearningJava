@@ -10,7 +10,7 @@ public class Solution {
     public int[] countBits(int num) {
         int[] result = new int[num+1];
         for (int i = 1; i <= num; i++){
-            result[i] = result[i/2] + i%2;
+            result[i] = result[i/2] + i%2;//只需要在这里把i/2替换成i>>1就可以了，其他的全部不变
         }
         return result;
     }
