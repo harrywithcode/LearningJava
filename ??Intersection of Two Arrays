@@ -25,7 +25,7 @@ public class Solution {
 //第二种做法
 public class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
-        Set<Integer> set = new HashSet<>();//只用一个set
+        Set<Integer> set = new HashSet<>();//只用一个set， 这个写法是什么原理？
         Arrays.sort(nums1);//注意array后面有个s
         Arrays.sort(nums2);
         int i = 0;
