@@ -1,4 +1,4 @@
-public class Solution { //第一种方法，排序法
+public class Solution { //第一种方法，排序法.为什么result用静态数组不可以实现功能？
     public int[] intersect(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
