@@ -3,7 +3,7 @@
 public class Solution {
     public int majorityElement(int[] num) {
         int major=num[0], count = 1;
-        for(int i=1; i<num.length;i++){
+        for(int i=1; i<num.length;i++){ //注意是从1开始
             if(count==0){
                 count++;
                 major=num[i];
