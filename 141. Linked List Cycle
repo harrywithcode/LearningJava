@@ -21,4 +21,6 @@ public class Solution {
         return false;
     }
 }
-//list里面所有的node，都指向了head，依我的感觉，貌似cycle的定义是list里的数只能和第一个重复才叫cycle
+//list里面所有的node，都指向了head，make all the node you visited links to the head ListNode. 
+//once you reach a new ListNode,see whether its next point is the head,if it is,
+//means the node you've already visited,which means the link has a cycle.
