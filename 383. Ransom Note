@@ -13,7 +13,7 @@ public class Solution {
     }
 }
 
-//////////////
+//////////////slower
 public class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         Map<Character, Integer> map = new HashMap<>();
