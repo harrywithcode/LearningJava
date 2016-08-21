@@ -1,4 +1,5 @@
 //如果不用newhead行不行？内部删除.next
+//为什么最后返回的是node，不应该是个list吗？
 /**
  * Definition for singly-linked list.
  * public class ListNode {
