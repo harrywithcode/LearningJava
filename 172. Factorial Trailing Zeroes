@@ -1,0 +1,12 @@
+public class Solution {
+    public int trailingZeroes(int n) {
+        int count = 0;
+        while(n>0){
+            n=n/5;    //n里面有多少个5
+            count=count+n;
+        }
+        return count;
+    }
+}
+10是由2和5组成的，所以出现一个2,5就有一个末尾的0的情况。2出现的频率很高，比5高，所以找5的频率就行了。
+25是5*5，多提供一个5,50也是，75也是，100也是
