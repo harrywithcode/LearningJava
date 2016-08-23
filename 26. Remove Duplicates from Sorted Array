@@ -1,0 +1,32 @@
+//不但要返回结果，还要对之前的数组进行操作处理
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length<2){  //加了这句话才能变快1ms
+            return nums.length;
+        }
+        int result = 0;
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i]==nums[i-1]){
+                result++; //重复的个数
+            }
+            nums[i-result]=nums[i]; //i-result的结果就是不重复的第一个数
+        }
+        return nums.length-result;
+    }
+}
+///
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length<2){  //加了这句话才能变快1ms
+            return nums.length;
+        }
+        int result = 1;
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i-1] != nums[i]){
+                nums[result] = nums[i];
+                result++;
+            }
+        }
+        return result;
+    }
+}
