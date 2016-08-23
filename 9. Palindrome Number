@@ -1,0 +1,14 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0||(x!=0&&x%10==0)) return false;
+        else if(x<10) return true;
+        int number = 0;
+        int judge=x;
+        while(x>0){
+            number = number*10+x%10;
+            x=x/10;
+        }//while出去以后，x的值已经被改变了，所以用了一个judge来保留x原来的值
+        return (judge==number);
+    }
+}
+/////
