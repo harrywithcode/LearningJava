@@ -1,0 +1,59 @@
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String[] word = str.split(" ");
+        if(word.length != pattern.length()) return false;
+        Map map = new HashMap();
+        for(Integer i = 0; i < pattern.length(); i++){
+            if(map.put(pattern.charAt(i),i) != map.put(word[i],i)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+You can use Map map = new HashMap(); directly without define the data type. However I don't know the default data type
+
+/////don't understand, just save and understand for future
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        HashMap<String, String> map = new HashMap<>();
+        HashSet<String> set = new HashSet<>();
+        String [] s = str.split(" ");
+        if(s.length != pattern.length()) return false;
+        for(int i = 0; i < pattern.length();i++){
+            String temp = pattern.substring(i,i+1); //定义一个String类型的变量去存储number截取第i个位置到第i+1个位置的字符串
+            if(map.get(temp) == null){
+               map.put(temp,s[i]);
+               if(!set.add(s[i]))
+                  return false;
+            }
+            else{
+                String saved = map.get(temp);
+                if(!saved.equals(s[i])) 
+                   return false;
+            }
+        }
+        return true;
+    }
+}
+//third one. Speed same with first one. Maybe easy to understand
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String[] arr= str.split(" ");
+        HashMap<Character, String> map = new HashMap<Character, String>();
+        if(arr.length!= pattern.length())
+            return false;
+        for(int i=0; i<arr.length; i++){
+            char c = pattern.charAt(i);
+            if(map.containsKey(c)){
+                if(!map.get(c).equals(arr[i]))
+                    return false;
+            }else{
+                if(map.containsValue(arr[i]))
+                    return false;
+                map.put(c, arr[i]);
+            }    
+        }
+        return true;
+    }
+}
