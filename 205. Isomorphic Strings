@@ -1,0 +1,32 @@
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int []m1 = new int[256];
+        int []m2 = new int[256];
+        int count = 1;
+        for(int i = 0; i < s.length(); i++){
+            if(m1[s.charAt(i)] != m2[t.charAt(i)]){
+                return false;
+            }
+            if(m1[s.charAt(i)]==0){
+                m1[s.charAt(i)] = count;
+                m2[t.charAt(i)] = count;
+                count++;
+            }
+        }
+        return true;
+    }
+}
+/////slow a lot. I post this edition just because I want to know what is the difference between int and Integer
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+     Map<Character, Integer> maps = new HashMap<Character, Integer>();
+     Map<Character, Integer> mapt = new HashMap<Character, Integer>();
+     for(Integer i = 0; i < s.length(); i++){
+         if(maps.put(s.charAt(i),i)!=mapt.put(t.charAt(i),i)){
+             return false;
+         }
+     }
+     return true;
+    }
+}
+
