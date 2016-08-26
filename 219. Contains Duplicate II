@@ -16,11 +16,12 @@ public class Solution {
         Set<Integer> set = new HashSet<Integer>();
         for(int i = 0; i < nums.length; i++){
             if(i > k){
-                set.remove(nums[i-k-1]);
+                set.remove(nums[i-k-1]); //只往小的那边比，大的那边一个一个往set里面加。移的太远的话，前面小的数就没用了，移除掉
             }
             if(!set.add(nums[i])){ //set不能添加的话，说明已经有一个存在了（非重复性）
                 return true;
             }
+            //set.add(nums[i]); 这句话可以不用加，不知道为什么可以不加，不过加了也没事
         }
         return false;
     }
