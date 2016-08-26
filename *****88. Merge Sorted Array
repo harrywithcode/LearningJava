@@ -10,3 +10,4 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
         }
     }
 }
+一步到位，直接把值移动到组合以后他预计的位置上。从小往大排也行
