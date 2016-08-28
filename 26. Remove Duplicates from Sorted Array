@@ -1,4 +1,4 @@
-//不但要返回结果，还要对之前的数组进行操作处理
+//不但要返回结果，还要对之前的数组进行操作处理,与27题极为类似
 public class Solution {
     public int removeDuplicates(int[] nums) {
         if (nums.length<2){  //加了这句话才能变快1ms
