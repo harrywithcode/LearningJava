@@ -14,7 +14,7 @@ public class Solution {
         return nums.length-result;
     }
 }
-///
+///如果速度一样的话，感觉第二个比较好理解一些
 public class Solution {
     public int removeDuplicates(int[] nums) {
         if (nums.length<2){  //加了这句话才能变快1ms
