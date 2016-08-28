@@ -12,7 +12,7 @@ public class Solution {
             n=n-1;
         }
         if (digits[0] == 0) {
-            int[] res = new int[digits.length+1];
+            int[] res = new int[digits.length+1];//必须用digits.length，不能用n，因为经过一个while循环以后n的值已经改变了
             res[0] = 1;
             return res;
         }
