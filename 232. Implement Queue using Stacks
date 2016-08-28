@@ -29,3 +29,38 @@ class MyQueue {
 }
 
 ///////////
+class MyQueue {
+    // Push element x to the back of queue.
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    public void push(int x) {
+        stack1.push(x);
+    }
+
+    // Removes the element from in front of queue.
+    public void pop() {
+        if(stack2.empty()){
+            while(!stack1.empty()){
+                stack2.push(stack1.pop());
+            }
+        }
+        stack2.pop();
+    }
+
+    // Get the front element.
+    public int peek() {
+        if(stack2.empty()){    //这里不能直接用pop函数来代替这个if判定。因为pop函数最后有一个stack2.pop（），假如stack里只有一个值
+                                //被pop出去以后就没有值了，所以返回的并不是当前的front value。想用pop函数也可以，把最后那句stack2.pop
+                                //删除掉，但这样又不满足pop函数了。最好的办法是在pop函数里引用peek函数
+            while(!stack1.empty()){
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.peek();
+    }
+
+    // Return whether the queue is empty.
+    public boolean empty() {
+        return stack1.empty() && stack2.empty();
+    }
+}
