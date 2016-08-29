@@ -19,3 +19,18 @@ public class Solution {
 }
     
 }
+///5ms
+public class Solution {
+    public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        int youshangx = Math.min(C,G);
+        int zuoxiax = Math.max(A,E);
+        int bottom = Math.max(youshangx, zuoxiax)-zuoxiax;//youshangx bu yi ding hui dayu zuoxia x
+        int youshangy = Math.min(D,H);
+        int zuoxiay = Math.max(B,F);
+        int high = Math.max(youshangy, zuoxiay) - zuoxiay;
+        if(bottom<=0 && high<=0){
+            return (D-B)*(C-A)+(H-F)*(G-E);
+        }
+        return (D-B)*(C-A)+(H-F)*(G-E)-high*bottom;
+    }
+}
