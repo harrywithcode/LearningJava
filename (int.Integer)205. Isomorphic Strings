@@ -1,3 +1,4 @@
+//第一种方法很巧妙，个人暂时还不能透彻理解
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
         int []m1 = new int[256];
