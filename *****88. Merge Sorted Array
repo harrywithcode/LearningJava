@@ -1,3 +1,4 @@
+//1 ms
 public void merge(int[] nums1, int m, int[] nums2, int n) {
     while(n>0){
         if(m>0&&nums1[m-1]>nums2[n-1]){
@@ -11,3 +12,26 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
     }
 }
 一步到位，直接把值移动到组合以后他预计的位置上。从小往大排也行
+//0 ms, less "if" command in while loop
+public class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        while(n>0 && m>0){
+            if(nums1[m-1]>nums2[n-1]){
+                nums1[m+n-1]=nums1[m-1];
+                m--;
+            }
+            else{
+                nums1[m+n-1] = nums2[n-1];
+                n--;
+            }
+        }
+        while(m > 0){
+            nums1[m+n-1] = nums1[m-1];
+            m--;
+        }
+        while(n>0){
+            nums1[m+n-1] = nums2[n-1];
+            n--;
+        }
+    }
+}
