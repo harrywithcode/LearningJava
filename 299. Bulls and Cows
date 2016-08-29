@@ -22,3 +22,4 @@ public class Solution {
         return bull+"A"+cow+"B";
     }
 }
+//number[guess.charAt(i)-'0']--;    number[secret.charAt(i)-'0']<0
