@@ -1,0 +1,9 @@
+public class Solution {
+    public int lengthOfLastWord(String s) {
+        s=s.trim(); //trim()方法返回调用字符串对象的一个副本，但是所有起始和结尾的空格都被删除了，
+                    //例子如下：String s="    Hello World      ".trim();就是把"Hello World"放入s中。
+        int lastindex = s.lastIndexOf(' ') + 1;
+        return s.length()-lastindex;
+    }
+}
+//int x = a.lastIndexOf(b),表示b字符串在a字符串中最后出现的位置。如a= "abcdabcd";b="d";那么x的值为7.
