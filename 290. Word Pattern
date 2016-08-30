@@ -1,6 +1,6 @@
 public class Solution {
     public boolean wordPattern(String pattern, String str) {
-        String[] word = str.split(" ");
+        String[] word = str.split(" ");  //word is an array which contains string items
         if(word.length != pattern.length()) return false;
         Map map = new HashMap();
         for(Integer i = 0; i < pattern.length(); i++){
