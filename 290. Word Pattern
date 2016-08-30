@@ -4,7 +4,8 @@ public class Solution {
         if(word.length != pattern.length()) return false;
         Map map = new HashMap();
         for(Integer i = 0; i < pattern.length(); i++){
-            if(map.put(pattern.charAt(i),i) != map.put(word[i],i)){
+            if(map.put(pattern.charAt(i),i) != map.put(word[i],i)){ //chongfu de hua, fangbu jinqu,suoyi shi false. if false != false
+            //shuoming pattern neng fangjinqu(mei chongfu), word fang bu jinqu (chongfu le),bu duiying, suoyi false
                 return false;
             }
         }
