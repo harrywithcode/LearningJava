@@ -1,0 +1,17 @@
+public class Solution {
+    public char findTheDifference(String s, String t) {
+        if(s == null){
+            return t.charAt(0);
+        }
+        int []m1 = new int[256];
+        for(int i = 0; i < s.length(); i++){
+            m1[s.charAt(i) - 'a']++;
+        }
+        for(int j = 0; j < t.length(); j++){
+            m1[t.charAt(j) - 'a'] --;
+            if(m1[t.charAt(j) - 'a']<0){
+                return t.charAt(j);
+            }
+        }
+    }
+}
