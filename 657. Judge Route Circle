@@ -1,0 +1,45 @@
+class Solution {
+    public boolean judgeCircle(String moves) {
+        char[] letters = moves.toCharArray();
+        
+        int left = 0;
+        int right = 0;
+        int up = 0;
+        int down = 0;
+        
+        for (char c : letters) {
+            if (c == 'L') {
+                left++;
+                if (right > 0) {
+                    left--;
+                    right--;
+                }
+            }
+            
+            if (c == 'R') {
+                right++;
+                if (left > 0) {
+                    right--;
+                    left--;
+                }
+            }
+            
+            if (c == 'U') {
+                up++;
+                if (down > 0) {
+                    up--;
+                    down--;
+                }
+            }
+            
+            if (c == 'D') {
+                down++;
+                if (up > 0) {
+                    down--;
+                    up--;
+                }
+            }
+        }
+        return left == 0 && right == 0 && up == 0 && down == 0;
+    }
+}
