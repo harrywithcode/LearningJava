@@ -1,0 +1,3 @@
+When use string.split
+if the element that you use to split is on first position, you need to delete the first element, or you will get one more length
+See 434. Number of Segments in a String
