@@ -1,0 +1,29 @@
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        char[] letters = word.toCharArray();
+                
+        int upperCaseCount = 0;
+        
+        if (Character.isLowerCase(letters[0])) {
+            for (int i = 0; i < letters.length; i++) {
+                if (Character.isLowerCase(letters[0]) && !Character.isLowerCase(letters[i])) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            for (int i = 0; i < letters.length; i++) {
+                if (!Character.isLowerCase(letters[i])) {
+                    upperCaseCount++;
+                }
+            }
+            if (upperCaseCount == letters.length) {
+                return true;
+            } else if (upperCaseCount == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+}
