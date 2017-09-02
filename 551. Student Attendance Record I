@@ -1,5 +1,16 @@
 class Solution {
     public boolean checkRecord(String s) {
+        if (s.indexOf("A") != s.lastIndexOf("A") || s.contains("LLL")) {
+            return false;
+        }
+        return true;
+    }
+}
+
+///////////////// faster my answer///////////////////////////////
+
+class Solution {
+    public boolean checkRecord(String s) {
         int countOfA = 0;
         int countOfL = 0;
         int continueOfL = 0;
