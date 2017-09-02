@@ -1,0 +1,40 @@
+//Make sure the first element of the string should not be the element that is used to split
+class Solution {
+    public int countSegments(String s) {
+        String str = s.trim();
+        if (str.length() == 0) {
+            return 0;
+        }
+        String[] result = str.split("\\s+");
+        return result.length;
+    }
+        
+    }
+}
+
+////////////Extend code   ////
+public class MainDriver {
+    public int countSegments(String str) {
+        //String str = s.trim();
+        if (str.length() == 0) {
+            return 0;
+        }
+        if (str.charAt(0) == 'a') {
+            str = str.substring(1);
+        }
+        String[] result = str.split("a");
+        for (String item : result) {
+            System.out.println(item);
+        }
+        return result.length;
+    }
+
+    public static void main(String[] args) {
+        final String test = "abacada a";
+        MainDriver m = new MainDriver();
+
+        final int output = m.countSegments(test);
+
+        System.out.println(output);
+    }
+}
