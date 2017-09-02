@@ -1,0 +1,30 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        int countOfA = 0;
+        int countOfL = 0;
+        int continueOfL = 0;
+        
+        char[] letters = s.toCharArray();
+        
+        for(char c: letters) {
+            if (c == 'P') {
+                continueOfL = 0;
+            }
+            if (c == 'A') {
+                countOfA++;
+                continueOfL = 0;
+            }
+            if (c == 'L') {
+                continueOfL++;
+                countOfL++;
+                if (continueOfL > 2) {
+                    return false;
+                }
+            }
+        }
+        if (countOfA > 1) {
+            return false;
+        }
+        return true;
+    }
+}
