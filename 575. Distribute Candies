@@ -1,0 +1,22 @@
+class Solution {
+    public int distributeCandies(int[] candies) {
+        int maxCount = candies.length / 2;
+        List<Integer> candidate = new ArrayList<>();
+        
+        Arrays.sort(candies);
+        
+        int current = candies[0];
+        candidate.add(current);
+        
+        for (int i : candies) {
+            if (i > current) {
+                candidate.add(current);
+                current = i;
+            }            
+            if (candidate.size() == maxCount) {
+                return maxCount;
+            }
+        }
+        return candidate.size();
+    }
+}
