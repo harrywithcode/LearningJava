@@ -1,0 +1,21 @@
+class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        int operations = ops.length;
+        int widthMin = Integer.MAX_VALUE;
+        int heightMin = Integer.MAX_VALUE;
+        
+        if (ops == null || ops.length == 0 || ops[0].length == 0) {
+            return m * n;
+        }
+        
+        for (int[] op : ops) {
+            if (op[0] < widthMin) {
+                widthMin = op[0];
+            }
+            if (op[1] < heightMin) {
+                heightMin = op[1];
+            }
+        }
+        return widthMin * heightMin;
+    }
+}
