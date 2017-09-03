@@ -1,3 +1,41 @@
+Two numbers should always close to square of area. So, find the cloest number of sqr(area)
+////
+class Solution {
+    public int[] constructRectangle(int area) {
+        int square = (int)Math.sqrt(area);
+        while (area % square != 0) {
+            square--;
+        }
+        return new int[]{area / square, square};
+    }
+}
+
+/////////////slower/////////////
+class Solution {
+    public int[] constructRectangle(int area) {
+        int minDifference = Integer.MAX_VALUE;
+        int[] result = new int[2];
+        
+        int square = (int)Math.sqrt(area);
+        
+        for (int i = 1; i <= square ; i++) {
+            if (area % i == 0) {
+                int j = area / i;
+                int difference = Math.max(i, j) - Math.min(i, j);
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    result[0] = Math.max(i, j);
+                    result[1] = Math.min(i, j);
+                }
+            }
+        }
+        return result;
+    }
+}
+
+
+/////////////slower///////
+
 class Solution {
     public int[] constructRectangle(int area) {
         int minDifference = Integer.MAX_VALUE;
