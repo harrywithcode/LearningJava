@@ -1,0 +1,25 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+        int minDifference = Integer.MAX_VALUE;
+        int[] result = new int[2];
+        
+        if (area == 1) {
+            result[0] = 1;
+            result[1] = 1;
+            return result;
+        }
+        
+        for (int i = 1; i <= area /2 ; i++) {
+            if (area % i == 0) {
+                int j = area / i;
+                int difference = Math.max(i, j) - Math.min(i, j);
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    result[0] = Math.max(i, j);
+                    result[1] = Math.min(i, j);
+                }
+            }
+        }
+        return result;
+    }
+}
