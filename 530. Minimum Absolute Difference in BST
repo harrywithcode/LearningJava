@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+// minimum distance should be considered in distance of every two connective nodes.
+class Solution {
+    private int min = Integer.MAX_VALUE;
+    private int pre = -1;
+    
+    public int getMinimumDifference(TreeNode root) {
+        if (root == null) {
+            return min;
+        }
+        
+        getMinimumDifference(root.left);
+        
+        if (pre != -1) {
+            min = Math.min(min, root.val - pre); //this pre is the previous visited node
+        }
+        pre = root.val; // pre update to current visiting node.
+        
+        getMinimumDifference(root.right);
+        return min;
+    }
+}
