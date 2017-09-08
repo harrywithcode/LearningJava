@@ -1,4 +1,40 @@
-////////////
+//Fastest
+class Solution {
+    public List<String> readBinaryWatch(int num) {
+        List<String> result = new ArrayList<>();
+        
+        for (int h = 0; h < 4; h++) {
+            int m = num - h;
+            if (m > 5) {
+                continue;
+            }
+            List<String> hour = new ArrayList<>();
+            for (int i = 0; i < 12; i++) {
+                if (Integer.bitCount(i) == h) {
+                    hour.add(String.valueOf(i));
+                }
+            }
+            List<String> minute = new ArrayList<>();
+            for (int i = 0; i < 60; i++) {
+                if (Integer.bitCount(i) == m) {
+                    if (i < 10) {
+                        minute.add("0" + String.valueOf(i));
+                    } else {
+                        minute.add(String.valueOf(i));
+                    }
+                }
+            }
+            for (String first : hour) {
+                for (String second : minute) {
+                    result.add(first + ":" + second);
+                }
+            }
+        }
+        return result;
+    }
+}
+
+///////////
 
 class Solution {
     
