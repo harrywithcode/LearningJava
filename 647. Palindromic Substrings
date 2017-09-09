@@ -1,0 +1,37 @@
+class Solution {
+    private int result = 0;
+    public int countSubstrings(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            countPalin(s, i, i + 1);
+            countPalin(s, i, i);
+        }
+        return result;
+    }
+    private void countPalin(String s, int i , int j) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            result++;
+            i--;
+            j++;
+        }
+    }
+}
+
+/////////////////No DP/////////////////
+class Solution {
+    public int countSubstrings(String s) {
+        int result = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; i - j >= 0 && i + j < s.length() && s.charAt(i - j) == s.charAt(i + j); j++) {
+                result++;
+            }
+            for (int j = 0; i - j - 1 >= 0 && i + j < s.length() && s.charAt(i - 1 - j) == s.charAt(i + j); j++) {
+                result++;
+            }
+        }
+        return result;
+    }
+}
