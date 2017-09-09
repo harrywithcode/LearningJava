@@ -22,3 +22,25 @@ class Solution {
 }
 
 http://blog.csdn.net/u012985132/article/details/52970960?locationNum=6&fps=1
+
+//
+class Solution {
+    public int numberOfArithmeticSlices(int[] A) {
+        int sum = 0;
+        int length = 0;
+        
+        if (A.length < 3) {
+            return 0;
+        }
+        for (int i = 0; i < A.length - 2; i++) {
+            if (A[i + 1] - A[i] == A[i + 2] - A[i + 1]) {
+                length++;
+                sum += length;
+            }
+            else {
+                length = 0;
+            }
+        }
+        return sum;
+    }
+}
