@@ -1,0 +1,19 @@
+class Solution {
+    public String complexNumberMultiply(String a, String b) {
+        String[] splitA = a.split("\\+");
+        String[] splitB = b.split("\\+");
+        
+        int a1 = Integer.valueOf(splitA[0]);
+        int a2 = Integer.valueOf(splitA[1].replace("i", ""));
+        
+        int b1 = Integer.valueOf(splitB[0]);
+        int b2 = Integer.valueOf(splitB[1].replace("i", ""));
+        
+        int result1 = a1 * b1;
+        int result2 = a1 * b2;
+        int result3 = a2 * b1;
+        int result4 = a2 * b2;
+        
+        return String.valueOf(result1 - result4) + "+" + String.valueOf(result2 + result3) + "i";
+    }
+}
