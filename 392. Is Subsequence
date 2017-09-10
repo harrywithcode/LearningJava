@@ -1,3 +1,5 @@
+
+//indexOf http://www.cnblogs.com/gzggyy/archive/2013/06/21/3148610.html
 class Solution {
     public boolean isSubsequence(String s, String t) {
         int i = 0;
