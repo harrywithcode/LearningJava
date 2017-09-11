@@ -1,0 +1,15 @@
+class Solution {
+    public int arrangeCoins(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        int floor = 1;
+        int sum = 1;
+        
+        while (n - sum >= floor + 1) {
+            floor++;
+            sum += floor;
+        }
+        return floor;
+    }
+}
