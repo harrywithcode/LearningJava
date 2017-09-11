@@ -1,0 +1,58 @@
+
+//From right to left
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll(); 
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+        }
+        return root.val;
+    }
+}
+
+//////////////
+recursion. Every node not only carries value but also carries depth level. Update record[] every time when traverse a new node
+///
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        return helper(root, 1, new int[]{0, 0});
+    }
+    private int helper(TreeNode root, int depth, int[] record) {
+        if (record[1] < depth) {
+            record[1] = depth;
+            record[0] = root.val;
+        }
+        if (root.left != null) {
+            helper(root.left, depth + 1, record);
+        }
+        if (root.right != null) {
+            helper(root.right, depth + 1, record);
+        }
+        return record[0];
+    }
+}
