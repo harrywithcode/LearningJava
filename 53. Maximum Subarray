@@ -1,4 +1,4 @@
-//DP
+//DP (Since this question, you only need to find the max value, you don't need to record value in process, so DP is unnecessary)
 class Solution {
     public int maxSubArray(int[] nums) {
         int[] dp = new int[nums.length];
