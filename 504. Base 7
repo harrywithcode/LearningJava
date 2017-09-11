@@ -1,0 +1,25 @@
+class Solution {
+    public String convertToBase7(int num) {
+        return Integer.toString(num, 7);
+    }
+}
+
+//////////////
+class Solution {
+    public String convertToBase7(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        StringBuilder str = new StringBuilder();
+        int temp = Math.abs(num);
+        while (temp != 0) {
+            int n = temp % 7;
+            str.append(String.valueOf(n));
+            temp = temp / 7;
+        }
+        if (num < 0) {
+            str.append("-"); 
+        }
+        return str.reverse().toString();
+    }
+}
