@@ -1,0 +1,36 @@
+//Pick out tallest group of people and sort them in a subarray (S). Since there's no other groups of people taller than them, therefore each guy's index will be just as same as his k value.
+//For 2nd tallest group (and the rest), insert each one of them into (S) by k value. So on and so forth.
+
+//In my understanding. First you put the highest group. Then for second group items, put each item to the position that they have.
+For example, first you put (7,0) and (7,1), then you want to put (6,1), just put (6,1) into index of "1". If (6,2),then put to index "2"
+
+//Code
+
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        if (people.length == 0) {
+            return new int[0][0];
+        }
+        Arrays.sort(people, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) { //method name "compare" cannot be changed.
+                if (b[0] == a[0]) {
+                    return a[1] - b[1]; // ascending order, first one on first position, second on second postion.
+                }
+                return b[0] - a[0]; // descending order, because use second to minus first.
+            }
+        });
+        
+        List<int[]> temp = new ArrayList<>();
+        for (int i = 0; i < people.length; i++) {
+            temp.add(people[i][1], new int[]{people[i][0], people[i][1]}); //The java.util.ArrayList.add(int index, E elemen) method inserts the specified element E at the specified position in this list.
+        }
+        int[][] result = new int[people.length][2];
+        int i = 0;
+        for (int k[] : temp) {
+            result[i][0] = k[0];
+            result[i][1] = k[1];
+            i++;
+        }
+        return result;
+    }
+}
