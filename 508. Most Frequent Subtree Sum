@@ -40,5 +40,6 @@ class Solution {
         }
         return sum; //postorder go down to bottom, and calculate the sum, but I don't know why return sum? sum is not use for above level.
         //Maybe because sum is used to compare with maxFreq???
+        //Or because sum is the value of "left" or "right"
     }
 }
