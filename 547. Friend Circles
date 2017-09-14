@@ -19,3 +19,28 @@ class Solution {
         }
     }
 }
+
+
+//
+class Solution {
+    public int findCircleNum(int[][] M) {
+        int[] hasFriend = new int[M.length];
+        int friendGroup = 0;
+        
+        for (int person = 0; person < M.length; person++) {
+            if (hasFriend[person] == 0) {
+                findFriend(hasFriend, M, person);
+                friendGroup++;
+            }
+        } 
+        return friendGroup;
+    }
+    private void findFriend(int[] hasFriend, int[][] M, int person) {
+        for (int potential = 0; potential < M[person].length; potential++) {
+            if (M[person][potential] == 1 && hasFriend[potential] == 0) {
+                hasFriend[potential] = 1;
+                findFriend(hasFriend, M, potential);
+            }
+        }
+    }
+}
