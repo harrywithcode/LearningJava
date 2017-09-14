@@ -1,0 +1,21 @@
+class Solution {
+    public int findCircleNum(int[][] M) {
+        int[] visited = new int[M.length];
+        int count = 0;
+        for (int i = 0; i < M.length; i++) {
+            if (visited[i] == 0) { //it means this line in M has not been visited. It means i doesn't have any friend and we will help it to find a friend.
+                dfs(M, visited, i);
+                count++; // a single person, no matter it has friend or not, we should count++, because if it has friends, their group++, or itself is a single group.
+            }
+        }
+        return count;
+    }
+    private void dfs(int[][] M, int[] visited, int i) {
+        for (int j = 0; j < M[0].length; j++) { //In line i, let's traverse this line by using j.
+            if (M[i][j] == 1 && visited[j] == 0) {
+                visited[j] = 1; //we find a new friend of i which name is j.
+                dfs(M, visited, j); // now let's help j to find its friends.
+            }
+        }
+    }
+}
