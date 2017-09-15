@@ -1,0 +1,47 @@
+Separate the calculation to do one bit at a time
+For example, we compare 0010, 1110, 0110, we don't need to compare every two pair each time, but we can compare each bit
+
+0010
+1110
+0110
+
+first bit, all same as 0
+second bit, all same as 1
+third bit, 0, 1, 1, so there are 2 different count.
+forth bit, 0, 1, 0, and there are 2 diffrent count.
+
+So totally 4.
+
+So at most compare 32 times.
+
+/////////////////////////////////////////////////////////////
+
+class Solution {
+    public int totalHammingDistance(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < 32; i++) {
+            int bitCount = 0;
+            for (int j = 0; j < nums.length; j++) {
+                bitCount += (nums[j] >> i) & 1;
+            }
+            sum += bitCount * (nums.length - bitCount);
+        }
+        return sum;
+    }
+}
+
+
+
+
+////////////////Low
+class Solution {
+    public int totalHammingDistance(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                sum += Integer.bitCount(nums[i] ^ nums[j]);
+            }
+        }
+        return sum;
+    }
+}
