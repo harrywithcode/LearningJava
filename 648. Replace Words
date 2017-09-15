@@ -1,0 +1,21 @@
+class Solution {
+    public String replaceWords(List<String> dict, String sentence) {
+        String[] words = sentence.split(" ");
+
+        for (String str : dict) {
+            for (int i = 0; i < words.length; i++) {
+                if (words[i].length() >= str.length() && words[i].substring(0, str.length()).equals(str)) {
+                    words[i] = str;
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i< words.length - 1; i++) {
+            sb.append(words[i]);
+            sb.append(" ");
+        }
+        sb.append(words[words.length - 1]);
+
+        return sb.toString();
+    }
+}
