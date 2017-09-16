@@ -1,0 +1,22 @@
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] result = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int i = nums.length -1; i >= 0; i--) {
+            stack.push(i);
+        }
+        
+        for (int i = nums.length - 1; i >= 0; i--) {
+            result[i] = -1; //The item that can't find larger one should equal to -1 as default.
+            while (!stack.isEmpty() && nums[stack.peek()] <= nums[i]) {
+                stack.pop(); // pop the stack until we meet the index of larger one of the item
+            }
+            if (!stack.isEmpty()) {
+                result[i] = nums[stack.peek()]; // now the item's value is the larger one. stack.peek() is the index
+            }
+            stack.push(i); // i can be the larger one of the next item
+        }
+        return result;
+    }
+}
