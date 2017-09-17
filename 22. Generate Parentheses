@@ -1,0 +1,21 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backTracking(result, "", 0, 0, n);
+        return result;
+    }
+    private void backTracking(List<String> result, String str, int open, int close, int count) {
+        if (str.length() == 2 * count) { //happy case
+            result.add(str);
+            return;
+        }
+        if (open < count) {
+            backTracking(result, str + "(", open + 1, close, count);
+        }
+        if (close < open) { //Once we add a '(' we will then discard it and try a ')' which can only close a valid '('
+            backTracking(result, str + ")", open, close + 1, count);
+        }
+    }
+}
+//back tracking. we remove a signal ( or ), but we need to add it back later.
+//normally, back tracking need helper method
