@@ -1,0 +1,93 @@
+class Solution {
+    public int[] findDiagonalOrder(int[][] matrix) {
+        if (matrix == null) {
+            return null;
+        }
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
+        int[] result = new int[matrix.length * matrix[0].length];
+        List<Integer> temp = new ArrayList<>();
+        int arrow = 0; // up = 0, down = 1
+        
+        for (int i = 0; i < matrix[0].length; i++) {
+            int height = 0;
+            int width = i;
+            List<Integer> list = new ArrayList<>();
+
+            while (height < matrix.length && width >= 0) {
+                list.add(matrix[height][width]);
+                height++;
+                width--;
+            }
+            
+            if (arrow == 0) {
+                Collections.reverse(list);
+                arrow = 1;
+            } else {
+                arrow = 0;
+            }
+            temp.addAll(list);
+        }
+        
+        for (int i = 1; i < matrix.length; i++) {
+            int height = i;
+            int width = matrix[0].length - 1;
+            List<Integer> list = new ArrayList<>();
+            
+            while (height < matrix.length && width >= 0) {
+                list.add(matrix[height][width]);
+                height++;
+                width--;
+            }
+            if (arrow == 0) {
+                Collections.reverse(list);
+                arrow = 1;
+            } else {
+                arrow = 0;
+            }
+            temp.addAll(list);
+        }
+        
+        for (int i = 0; i < temp.size(); i++) {
+            result[i] = temp.get(i);
+        }
+        return result;
+    }
+}
+
+//////////////////////////////////////////////////////////////
+class Solution {
+    public int[] findDiagonalOrder(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return new int[0];
+        }
+        int height = 0;
+        int width = 0;
+        int[] result = new int[matrix.length * matrix[0].length];
+        
+        for (int i = 0; i < result.length; i++) {
+            result[i] = matrix[height][width];
+            if ((height + width) % 2 == 0) { // move up
+                if (width == matrix[0].length - 1) {
+                    height++;
+                } else if (height == 0) {
+                    width++;
+                } else {
+                    height--;
+                    width++;
+                }
+            } else {
+                if (height == matrix.length - 1) {
+                    width++;
+                } else if (width == 0) {
+                    height++;
+                } else {
+                    height++;
+                    width--;
+                }
+            }
+        }
+        return result;
+    }
+}
