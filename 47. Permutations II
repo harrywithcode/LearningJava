@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        backTrack(result, new ArrayList<>(), nums, new boolean[nums.length]); // because the answer contains all elements, so we use array instead of start to keep all elements appear.
+        return result;
+    }
+    private void backTrack(List<List<Integer>> result, List<Integer> line, int[] nums, boolean[] used) {
+        if (line.size() == nums.length) {
+            result.add(new ArrayList<>(line));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i] || i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
+            }
+            used[i] = true;
+            line.add(nums[i]);
+            backTrack(result, line, nums, used);
+            used[i] = false;
+            line.remove(line.size() - 1);
+        }
+        return;
+    }
+}
