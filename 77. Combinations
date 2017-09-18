@@ -1,7 +1,7 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new ArrayList<>();
-        backTrack(result, new ArrayList<>(), n, k, 0);
+        backTrack(result, new ArrayList<>(), n, k, 1); //range is from 1 to n, not start from 0
         return result;
     }
     private void backTrack(List<List<Integer>> result, List<Integer> line, int n, int k, int start) {
