@@ -5,3 +5,4 @@ See 434. Number of Segments in a String
 
 Back tracking, good sumary
 https://leetcode.com/problems/permutations/discuss/
+基本上，求各种排列组合的题都是back tracking。因为我们删掉一个数，之后还要找“回来”
