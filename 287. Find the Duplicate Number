@@ -1,0 +1,29 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int slow = 0;
+        int fast = 0;
+        
+        do {
+            slow = nums[slow]; //2，1, 5
+            fast = nums[nums[fast]]; //1, 3, 5  //every time in while loop, fast move one more step than slow.
+                                    //When fast == slow, it means fast move at least one more cycle than slow
+        } while (slow != fast);
+        
+        slow = 0; //fast = 5 //actually this time, slow or fast = 0 are both okay.
+        
+        while (slow != fast) {
+            slow = nums[slow]; //2, 1, 5, 3, 1, 5, 3, 1, 5, 3
+            fast = nums[fast]; //3, 1, 5, 3, 1, 5, 3, 1
+        }
+        return slow;
+    }
+}
+//input 2 5 1 1 4 3
+//index 0 1 2 3 4 5
+
+//The main idea is the same with problem Linked List Cycle II,https://leetcode.com/problems/linked-list-cycle-ii/. 
+Use two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only step each time. 
+They must meet the same item when slow==fast. In fact, they meet in a circle, 
+the duplicate number must be the entry point of the circle when visiting the array from nums[0]. 
+Next we just need to find the entry point. We use a point(we can use the fast one before) to visit form begining with one step each time, 
+do the same job to slow. When fast==slow, they meet at the entry point of the circle. The easy understood code is as follows.
