@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        int count = counter(root.left); // go through small side
+        if (k <= count) { //Kth is in left side
+            return kthSmallest(root.left, k);
+        } else if (k > count + 1) { //Kth is in right side, and right side should has k - count - 1 need to visit
+            return kthSmallest(root.right, k - count - 1);
+        }
+        return root.val;
+        
+    }
+    private int counter(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + counter(root.left) + counter(root.right);
+    }
+}
+//BST is sorted structure which contains lots of information we can use.
+//Traverse from small to large, count++ after visit one node. When count == k, return.
+//in-order
