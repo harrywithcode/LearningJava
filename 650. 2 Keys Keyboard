@@ -1,0 +1,18 @@
+class Solution {
+    public int minSteps(int n) {
+        int[] dp = new int[n + 1]; //every time when you define a dp array, length is always one more large.
+        //when length = 0 or 1, there is no operation.
+        for (int i = 2; i <= n; i++) {
+            dp[i] = i;
+            for (int j = i - 1; j > 1; j--) {
+                if (i % j == 0) { //j can copy multiple time to reach i
+                    dp[i] = dp[j] + i / j; //update operation time. i / j means add one at a time.
+                    break;
+                }
+            }
+        }
+        return dp[n]; //similar to fob number
+    }
+}
+//use dp
+//zhiyao neng copyAll, mashang copyAll, bu yao ++
