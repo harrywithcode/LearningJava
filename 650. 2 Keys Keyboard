@@ -1,5 +1,21 @@
 class Solution {
     public int minSteps(int n) {
+        int step = 0;
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                step += i;
+                n = n / i;
+            }
+        }
+        return step;
+    }
+}
+//neng chu jiu chu, bu neng chu jiu i++
+
+/////////////////
+
+class Solution {
+    public int minSteps(int n) {
         int[] dp = new int[n + 1]; //every time when you define a dp array, length is always one more large.
         //when length = 0 or 1, there is no operation.
         for (int i = 2; i <= n; i++) {
