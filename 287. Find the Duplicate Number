@@ -27,3 +27,31 @@ They must meet the same item when slow==fast. In fact, they meet in a circle,
 the duplicate number must be the entry point of the circle when visiting the array from nums[0]. 
 Next we just need to find the entry point. We use a point(we can use the fast one before) to visit form begining with one step each time, 
 do the same job to slow. When fast==slow, they meet at the entry point of the circle. The easy understood code is as follows.
+
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int n = nums.length - 1;
+        int low = 1;
+        int high = n;
+        int mid;
+        
+        while (low < high) {
+            mid = (low + high) / 2;
+            int count = 0;
+            for (int num : nums) {
+                if (num <= mid){
+                    count++;
+                }
+            }
+            if (count>mid) {
+                high = mid;
+            } //it means the duplicated value is in前半部分
+            else {
+                low = mid + 1;
+            } //后半部分
+        }
+        return low;
+    }
+}
+//类似于二分法，时间复杂度是O(nlogN)
