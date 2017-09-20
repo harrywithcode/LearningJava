@@ -1,0 +1,25 @@
+class Solution {
+    public String findLongestWord(String s, List<String> d) {
+        String longest = "";
+        for (String dictWord : d) {
+            int sameCount = 0;
+            for (char c : s.toCharArray()) {
+                if (sameCount < dictWord.length() && c == dictWord.charAt(sameCount)) {
+                    sameCount++;
+                }
+                if (sameCount == dictWord.length() && dictWord.length() >= longest.length()) { //just like traverse one array and compare to find max
+                    if (dictWord.length() > longest.length() || dictWord.compareTo(longest) < 0) { //dictWord's first letter is smaller than longest's
+                        longest = dictWord;
+                    }
+                }
+            }
+        }
+        return longest;
+    }
+}
+
+//Just like traverse an unordered array. Visit every element to see whether it is qualified. If it is qualified, compare it with "longest" to decide whether this current element can replace "longest" and become the new "longest"
+
+//Otherwise, we can use the method below but may has higher time complexity
+
+//We sort the input dictionary by longest length and lexicography. Then, we iterate through the dictionary exactly once. The first qualified substring s must be the desired solution.
