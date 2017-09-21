@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<List<String>> printTree(TreeNode root) {
+        List<List<String>> result = new ArrayList<>();
+        int count =  maxDepth(root);
+        int row = count;
+        int col = (int)Math.pow(2, count) - 1;
+        
+        for (int i = 0; i < row; i++) {
+            List<String> line = new ArrayList<>();
+            for (int j = 0; j < col; j++) {
+                line.add("");
+            }
+            result.add(line);
+        }
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<int[]> index = new LinkedList<>(); // store col of left and right child. Remember here index doesn't store row value. We use a new variable called "r" to store row value.
+        
+        queue.offer(root);
+        index.offer(new int[]{0, col - 1}); //two sides
+        
+        int r = -1;
+            
+        while (!queue.isEmpty()) {
+            r++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                int[] indice = index.poll();
+                
+                if (cur == null) {
+                    continue;
+                }
+                int left = indice[0];
+                int right = indice[1];
+                int mid = left + (right - left) / 2;
+                result.get(r).set(mid, String.valueOf(cur.val));
+                
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+                index.offer(new int[]{left, mid - 1}); //this node will sit in the middle of "left" and "mid - 1".
+                index.offer(new int[]{mid + 1, right});
+                
+            }
+        }
+        return result;
+    }
+    private int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return 1+ Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
