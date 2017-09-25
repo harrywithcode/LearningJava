@@ -1,0 +1,20 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int start = 0;
+        int maxCount = 0;
+        int maxLength = 0;
+        int[] count = new int[26];
+        
+        for (int end = 0; end < s.length(); end++) {
+            count[s.charAt(end) - 'A']++; //This letter appears once so we add it.
+            maxCount = Math.max(maxCount, count[s.charAt(end) - 'A']); //s.charAt(end) - 'A is just a index of this current letter.
+            
+            while (end - start + 1 - maxCount > k) {
+                count[s.charAt(start) - 'A']--; //we leaved from start. So minus its count, or there will be lots of duplicated plus operations.
+                start++; //Don't be afraid to miss some positions. Remember you traverse the array from beginning to current step.
+            }
+            maxLength = Math.max(maxLength, end - start + 1); //at this time, end - start + 1 means that all letters in this range can be same after change some of the letters.
+        }
+        return maxLength;
+    }
+}
