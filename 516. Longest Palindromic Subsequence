@@ -1,0 +1,30 @@
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        int[][] dp = new int[s.length()][s.length()];
+        
+        for (int i = s.length() - 1; i >= 0; i --) { //start pointer
+            dp[i][i] = 1;
+            
+            for (int j = i + 1; j < s.length(); j++) { //end pointer
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]); // if dp[i][j] is not palind, find in range(i, j), the max length of palinda, that is to compare two sub-range.
+                }
+            }
+        }
+        return dp[0][s.length() - 1];
+    }
+}
+
+////
+像这种有关极值的问题，最应该优先考虑的就是贪婪算法和动态规划，这道题显然使用DP更加合适。
+我们建立一个二维的DP数组，其中dp[i][j]表示[i,j]区间内的字符串的最长回文子序列，
+那么对于递推公式我们分析一下，如果s[i]==s[j]，那么i和j就可以增加2个回文串的长度，我们知道中间dp[i + 1][j - 1]的值，那么其加上2就是dp[i][j]的值。
+如果s[i] != s[j]，那么我们可以去掉i或j其中的一个字符，然后比较两种情况下所剩的字符串谁dp值大，就赋给dp[i][j]，那么递推公式如下：
+
+              /  dp[i + 1][j - 1] + 2                       if (s[i] == s[j])
+
+dp[i][j] =
+
+              \  max(dp[i + 1][j], dp[i][j - 1])        if (s[i] != s[j])
