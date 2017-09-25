@@ -1,0 +1,33 @@
+class Solution {
+    
+    //The dp[i][j] saves how much more scores that the first-in-action player will get from i to j than the second player. 
+    //Meaning of i and j is most important.
+    public boolean PredictTheWinner(int[] nums) {
+        int[][] dp = new int[nums.length][nums.length]; // you need to know when should use nums.length, when to use nums.length + 1. This based on the base case.
+        for (int i = 0; i < nums.length; i++) {
+            dp[i][i] = nums[i];
+        }
+        for (int length = 1; length < nums.length; length++) { //length is the distance between i and j
+            for (int i = 0; i < nums.length - length; i++) {
+                int j = i + length;
+                dp[i][j] = Math.max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]); 
+                //Not very clear. Need to take dinner. Solve it later.
+                //item 1 means pick up right one. item 2 means pick up left one. The reason that pick up the maximum value is because, for (nums[i] - dp[i + 1][j]), obviously we want to pick the one that as far as nums[i]. For (nums[j] - dp[i][j - 1]), this time we pick it, the left one, but next round we can pick the large number.
+            }
+        }
+        return dp[0][nums.length - 1] >= 0;
+    }
+}
+
+//Question description: every time, two players have to pick up a number at head or tail of the array.
+//Each small step will decide the final result. So, big problem divde into sub problem, this should use DP
+
+//it is player A's turn to pick the number now. 
+If player A picks position i, player A will earn nums[i] score instantly. 
+Then player B will choose from i + 1 to j. 
+Please note that dp[i + 1][j] already saves how much more score that the first-in-action player will get from i + 1 to j than the second player. 
+So it means that player B will eventually earn dp[i + 1][j] more score from i + 1 to j than player A. 
+So if player A picks position i, eventually player A will get nums[i] - dp[i + 1][j] more score than player B after they pick up all numbers.
+Similarly, if player A picks position j, player A will earn nums[j] - dp[i][j - 1] more score than player B after they pick up all numbers.
+Since A is smart, A will always choose the max in those two options, so:
+dp[i][j] = Math.max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
