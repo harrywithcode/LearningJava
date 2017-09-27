@@ -1,0 +1,26 @@
+class Solution {
+    public int findMaxLength(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                nums[i] = -1;
+            }
+        }
+        
+        Map<Integer, Integer> map = new HashMap<>();
+        int sum = 0;
+        int max = 0;
+        
+        map.put(0, -1); //
+        
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            
+            if (map.containsKey(sum)) { //this means the sum come back to equal to before value. Because there is only -1 and 1, so this means at this step, number of 1 equals to number of -1.好比爬山，上了一段，又下来，下来的时候遇到刚才上的时候的地方，这时候你的总和上升高度是0，客观上升高度又达到了刚才上山时候的高度。
+                max = Math.max(max, i - map.get(sum)); //i - map.get(sum) is the distance with last pointer and current pointer
+            } else {
+                map.put(sum, i); //record every step and the total height with this step
+            }
+        }
+        return max;
+    }
+}
