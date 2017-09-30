@@ -1,0 +1,39 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        if (nums.length == 0) {
+            return true;
+        }
+        
+        int sum = 0;
+        
+        for (int i : nums) {
+            sum += i;
+        }
+        
+        if (sum % 2 != 0) {
+            return false;
+        }
+        
+        sum /= 2;
+        
+        boolean[] dp = new boolean[sum + 1]; 
+        //"whether should we take the currently visited number into the sum or not".
+        //length need to +1 if dp contains base case
+       
+        dp[0] = true; 
+        //base case, we put the first number into sum-set
+       
+        for (int i = 1; i <= nums.length; i++) {
+            for (int j = sum; j >= nums[i - 1]; j--) {
+                dp[j] = dp[j] || dp[j - nums[i - 1]]; //i - 1 is the last step
+                //j这一步能不能算进sum里，要看j是怎么来的。j是由之前的数迈了nums[i - 1]才到j的，而迈的这个步伐我们从1到nums.length全都试一下
+            }
+        }
+        return dp[sum];
+    }
+}
+
+To construct the DP recurrence, when we are visiting nums[i] and to find partition of sum j:
+if we do not take the nums[i], then the current iteration does not make any difference on current DP value;
+if we take the nums[i], then we need to find whether the (new_sum = j - nums[i]) can be constructed.
+If any of this two construction can work, the partition of sum == j can be reached.
