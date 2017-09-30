@@ -37,3 +37,40 @@ To construct the DP recurrence, when we are visiting nums[i] and to find partiti
 if we do not take the nums[i], then the current iteration does not make any difference on current DP value;
 if we take the nums[i], then we need to find whether the (new_sum = j - nums[i]) can be constructed.
 If any of this two construction can work, the partition of sum == j can be reached.
+
+/////////////////////////////////
+class Solution {
+    public boolean canPartition(int[] nums) {
+        if (nums.length == 0) {
+            return true;
+        }
+        
+        int sum = 0;
+        
+        for (int i : nums) {
+            sum += i;
+        }
+        
+        if (sum % 2 != 0) {
+            return false;
+        }
+        
+        sum /= 2;
+        
+        boolean[] dp = new boolean[sum + 1]; 
+        //"whether should we take the currently visited number into the sum or not".
+        //length need to +1 if dp contains base case
+       
+        dp[0] = true; 
+        //base case, we put the first number into sum-set
+       
+        for (int i = 0; i < nums.length; i++) {    //我们从第一个数开始，每个数过一遍，看看它能不能放进sum-set里面。
+            for (int j = sum; j >= nums[i]; j--) {    //从target sum开始，只要sum比这个数大，或者等于，就sum--，挨个sum值过一遍，看看sum = j的时候，这个数能不能放进“currentSum”里
+                dp[j] = dp[j] || dp[j - nums[i]]; 
+                //在sum等于j的时候，如果这个数可以放进去，那sum-这个数（另一半）肯定也能放进去。
+                //所以，dp[j]就是第一半，dp[j - nums[i]]是第二半，这两半中间只要有一个能放进去就行
+            }
+        }
+        return dp[sum];
+    }
+}
