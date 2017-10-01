@@ -32,3 +32,9 @@ class Solution {
         }
     }
 }
+//Actually, the problem is the same as "Given a collection of intervals, find the maximum number of intervals that are non-overlapping." 
+(the classic Greedy problem: Interval Scheduling). With the solution to that problem, 
+guess how do we get the minimum number of intervals to remove? : )
+
+Sorting Interval.end in ascending order is O(nlogn), 
+then traverse intervals array to get the maximum number of non-overlapping intervals is O(n). Total is O(nlogn).
