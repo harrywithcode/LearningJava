@@ -1,0 +1,80 @@
+////////// O(logn) ///////////////
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            
+            if (nums[mid] < nums[mid + 1]) {  //ascending, you don't need to judge " nums[mid] > nums[mid - 1] "
+                start = mid + 1; //in this situation, mid must not be the result
+            } else if (nums[mid] > nums[mid + 1]) { //descending
+                end = mid; //here end = mid, not mid - 1, because in this situation, mid maybe the result, so we can't skip mid.
+                //here is important. Not every time we write mid + 1 or mid - 1, we need to consider why we should skip this value first.
+            }
+            if (start == end) {
+                return start;
+            }
+        }
+        return end;
+    }
+}
+//Use binary search, if the mid point is on ascending slope, focus on right part
+//if the mid point is on desending slope, focus on left part.
+
+///// O(logn) recursive ////////////
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        return binarySearch(nums, 0, nums.length - 1); //recursive need to put start and end index as parameters.
+        //this is also the reason that we need another method, because of the input variable is not enough.
+    }
+    private int binarySearch(int[] nums, int start, int end) {
+        if (start == end) {
+            return start;
+        }
+        int mid = start + (end - start) / 2;
+        
+        if (nums[mid] > nums[mid + 1]) { //desending order
+            return binarySearch(nums, start, mid);
+        } else { //ascending order
+            return binarySearch(nums, mid + 1, end);
+        }
+    }
+}
+
+//////// O(n) ///////////////////
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int result = 0;
+        if (nums.length == 1) {
+            return 0;
+        }
+        if (nums[0] > nums[1]) {
+            return 0;
+        }
+        if (nums[nums.length - 1] > nums[nums.length - 2]) {
+            return nums.length - 1;
+        }
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+}
+
+///////// O(n) shorter code //////////////
+class Solution {
+    public int findPeakElement(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                return i;
+            }
+        }
+        return nums.length - 1;
+    } 
+}
