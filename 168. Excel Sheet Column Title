@@ -1,3 +1,18 @@
+class Solution {
+    public String convertToTitle(int n) {
+        StringBuilder sb = new StringBuilder();
+        
+        while (n > 0) {
+            n--; //since 1 means A, not 0 means A, so need -1 first
+            sb.append((char)('A' + n % 26));
+            n = n / 26;
+        }
+        return sb.reverse().toString();
+    }
+}
+
+//// 1 year ago ///
+
 public class Solution {
     public String convertToTitle(int n) {
         String res = "";
