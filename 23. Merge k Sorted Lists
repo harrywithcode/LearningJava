@@ -37,7 +37,8 @@ class Solution {
             tail = tail.next;
             
             if (tail.next != null) {
-                queue.add(tail.next); // I don't know when this appear
+                queue.add(tail.next); // for example, the first list end with value of 3, the second list start with value of 4.
+                //Then tail has next, which means "3" next is "4"
             }
         }
         return dummy.next;
