@@ -6,35 +6,35 @@ class Solution {
             return result;
         }
         
-        int matrixRow = matrix.length;
-        int matrixCol = matrix[0].length;
+        int bottomRow = matrix.length;
+        int rightCol = matrix[0].length;
         
-        int visitedRow = 0;
-        int visitedCol = 0;
+        int topRow = 0;
+        int leftCol = 0;
         
-        while (visitedRow < matrixRow && visitedCol < matrixCol) {
-            for (int index = visitedCol; index < matrixCol; index++) {
-                result.add(matrix[visitedRow][index]);
+        while (topRow < bottomRow && leftCol < rightCol) {
+            for (int index = leftCol; index < rightCol; index++) {
+                result.add(matrix[topRow][index]);
             }
-            visitedRow++;
+            topRow++;
             
-            for (int index = visitedRow; index < matrixRow; index++) {
-                result.add(matrix[index][matrixCol - 1]);
+            for (int index = topRow; index < bottomRow; index++) {
+                result.add(matrix[index][rightCol - 1]);
             }
-            matrixCol--;
+            rightCol--;
             
-            if (visitedRow <= matrixRow - 1) {
-                for (int index = matrixCol - 1; index >= visitedCol; index--) {
-                    result.add(matrix[matrixRow - 1][index]);
+            if (topRow <= bottomRow - 1) {
+                for (int index = rightCol - 1; index >= leftCol; index--) {
+                    result.add(matrix[bottomRow - 1][index]);
                 }
-                matrixRow--;
+                bottomRow--;
             }
             
-            if (visitedCol <= matrixCol - 1) {
-                for (int index = matrixRow - 1; index >= visitedRow; index--) {
-                    result.add(matrix[index][visitedCol]);
+            if (leftCol <= rightCol - 1) {
+                for (int index = bottomRow - 1; index >= topRow; index--) {
+                    result.add(matrix[index][leftCol]);
                 }
-                visitedCol++;
+                leftCol++;
             }
         }
         return result;
