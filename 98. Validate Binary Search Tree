@@ -1,0 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root, Long.MAX_VALUE, Long.MIN_VALUE);
+    }
+    private boolean isValid(TreeNode root, long max, long min) {
+        if (root == null) {
+            return true;
+        }
+        if (root.val >= max || root.val <= min) {
+            return false;
+        }
+        return isValid(root.left, root.val, min) && isValid(root.right, max, root.val);
+        //if node move to left, then max is updated. If node move to right, then min is updated
+    }
+}
+
+//////////////////////////////
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pre != null && root.val <= pre.val) { //at this time, root should be appear at right part of pre
+                return false;
+            }
+            pre = root;
+            root = root.right;
+        }
+        return true;
+    }
+}
