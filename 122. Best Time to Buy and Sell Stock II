@@ -3,6 +3,36 @@ class Solution {
         if (prices.length == 0) {
             return 0;
         }
+        int result = 0;
+        int bottom = prices[0];
+        int peak = prices[0];
+        int i = 0;
+        
+        while (i < prices.length) {
+            while (i < prices.length - 1 && prices[i + 1] <= prices[i]) {
+                i++;
+            }
+            bottom = prices[i];
+            
+            while (i < prices.length - 1 && prices[i + 1] >= prices[i]) {
+                i++;
+            }
+            
+            peak = prices[i];
+            
+            result += peak - bottom;
+            i++;
+        }
+        return result;
+    }
+}
+
+//////////////////////////////////////////////
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) {
+            return 0;
+        }
         
         int valley = prices[0];
         int peak = prices[0];
