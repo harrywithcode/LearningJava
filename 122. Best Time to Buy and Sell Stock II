@@ -21,7 +21,7 @@ class Solution {
             peak = prices[i];
             
             result += peak - bottom;
-            i++;
+            i++;    //避免array里只有一个数的情况，这样的话，就会跳不出最外面的while
         }
         return result;
     }
