@@ -8,26 +8,23 @@
  * }
  */
 class Solution {
-    public List<Interval> merge(List<Interval> intervals) {  
-        intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
-        List<Interval> result = new LinkedList<>();
+    public List<Interval> merge(List<Interval> intervals) {
+        Collections.sort(intervals, new Comparator<Interval>() {    //Sort arraylist, so use Collections
+            @Override
+            public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+            }
+        });
         
-        if (intervals.size() == 0) {
-            return result;
-        }
-        int start = intervals.get(0).start;
-        int end = intervals.get(0).end;
         
-        for (Interval interval : intervals) {
-            if (interval.start <= end) {
-                end = Math.max(end, interval.end);
-            } else {
-                result.add(new Interval(start, end));
-                start = interval.start;
-                end = interval.end;
+        
+        for (int i = 0; i < intervals.size() - 1; i++) {
+            if (intervals.get(i).end >= intervals.get(i + 1).start) {
+                intervals.get(i).end = Math.max(intervals.get(i).end, intervals.get(i + 1).end);    //i + 1's end may smaller than i's
+                intervals.remove(i + 1);
+                i--;    //now i + 1 becomes i. need go back or we will skip the new generated interval
             }
         }
-        result.add(new Interval(start, end));
-        return result;
+        return intervals;
     }
 }
