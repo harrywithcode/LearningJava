@@ -1,0 +1,39 @@
+//sb test case 错了
+class Solution {
+    public int findKthLargest(int[] arr, int k) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int reader = left;
+            int writer = right;
+            int mid = arr[(reader + writer) / 2];
+
+            // stop if the reader and writer meets
+            while (reader < writer) {
+                if (arr[reader] >= mid) { // put the large values at the end
+                    int tmp = arr[writer];
+                    arr[writer] = arr[reader];
+                    arr[reader] = tmp;
+                    writer--;
+                } else { // the value is smaller than the pivot, skip
+                    reader++;
+                }
+            }
+
+            // if we stepped up (reader++) we need to step one down
+            if (arr[reader] > mid)
+                reader--; //if reader++ 正好达到mid，mid就要和比他大的数换。要确保arr[reader]肯定比mid小，不然边界线不好划分
+
+            // the reader pointer is on the end of the first k elements
+            if (k < reader) {
+                right = reader;//right以右都排好了
+            } else if (k > reader) {
+                left = reader + 1; //left以左都排好了
+            } else {
+                return arr[k];
+            }
+        }
+        return arr[k - 1];
+    }
+}
