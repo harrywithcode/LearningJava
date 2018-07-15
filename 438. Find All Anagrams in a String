@@ -1,0 +1,50 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        if (p.length() > s.length()) {
+            return result;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < p.length(); i++) {
+            char c = p.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        
+        int count = map.size();
+        int start = 0;
+        int end = 0;
+        int head = 0;
+        int length = Integer.MAX_VALUE;
+        
+        while (end < s.length()) {
+            char c = s.charAt(end);
+            
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) - 1);
+                
+                if (map.get(c) == 0) {
+                    count--;
+                }
+            }
+            end ++; //go to the most right side of source string that cost all characters type in the window. In this process, it may burn some characters to be negative in order to burn all types of character.
+            //before this end point, you will never find a valid string, because before this end point, you must lack at least one type of char.
+            
+            while (count == 0) {
+                char temp = s.charAt(start);
+                
+                if (map.containsKey(temp)) { //we find a candidate that the window contains this character.
+                    map.put(temp, map.get(temp) + 1); //fill out 
+                    
+                    if (map.get(temp) > 0) { //finally filled out, it's time to check start-end and window.
+                        count++;
+                        if (end - start == p.length()) {
+                            result.add(start);
+                        }
+                    }
+                }
+                start++;
+            }
+        }
+        return result;
+    }
+}
