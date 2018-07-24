@@ -1,0 +1,20 @@
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+        int start = 0;
+        int end = -1;
+        int max = nums[0]; //don't use Integer.MIN_VALUE, cause this will initial max as the second element of the array, and skip the first one.
+        int min = nums[nums.length - 1];
+        
+        for (int i = 1; i < nums.length; i++) {
+            max = Math.max(max, nums[i]);
+            min = Math.min(min, nums[nums.length - 1 - i]);
+            if (nums[i] < max) {
+                end = i; // the last desending valley. Find it from head to tail.
+            }
+            if (nums[nums.length - 1 - i] > min) {
+                start = nums.length - 1 - i; // get the first peak, find it from tail to head.
+            }
+        }
+        return end - start + 1;
+    }
+}
