@@ -1,0 +1,35 @@
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+class Solution {
+    public int minMeetingRooms(Interval[] intervals) {
+        //sort the interval and find whether there is overlap
+        int[] starts = new int[intervals.length];
+        int[] ends = new int[intervals.length];
+        
+        for (int i = 0; i < intervals.length; i++) {
+            starts[i] = intervals[i].start;
+            ends[i] = intervals[i].end;
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        
+        int room = 0;
+        int currentEarliestEndTime = 0;//This is awesome, two pointers.当前最早结束时间
+        
+        for (int i = 0; i < starts.length; i++) {
+            if (starts[i] < ends[currentEarliestEndTime]) {
+                room++;//如果开始时间早于当前最早会议结束时间，则必须需要一间新房间。
+            } else {
+                currentEarliestEndTime++;//如果当前开始时间晚于最早会议结束时间，则不需要新房间，用这个房间开新会议就行了，当前最早会议结束时间也随之改变
+            }
+        }
+        return room;
+    }
+}
