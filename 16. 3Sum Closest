@@ -1,20 +1,27 @@
 class Solution {
     public int threeSumClosest(int[] nums, int target) {
+        //fix one number, two pointer to point other two candidates.
+        int distance = Integer.MAX_VALUE;
+        int result = 0;
         Arrays.sort(nums);
-        int result = nums[0] + nums[1] + nums[nums.length - 1];
+        
         for (int i = 0; i < nums.length - 2; i++) {
-            int p1 = i + 1;
-            int p2 = nums.length - 1;
-            
-            while (p1 < p2) {
-                int sum = nums[i] + nums[p1] + nums[p2];
-                if (sum > target) {
-                    p2--;
-                } else {
-                    p1++;
+            int start = i + 1;
+            int end = nums.length - 1;
+            while (start < end) {
+                int sum = nums[i] + nums[start] + nums[end];
+                
+                if (sum == target) {
+                    return sum;
                 }
-                if (Math.abs(sum - target) < Math.abs(result - target)) {
+                if (Math.abs(sum - target) < distance) {
+                    distance = Math.abs(sum - target);
                     result = sum;
+                }
+                if (sum < target) {
+                    start++;
+                } else {
+                    end--;
                 }
             }
         }
