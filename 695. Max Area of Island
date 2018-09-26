@@ -1,0 +1,50 @@
+class Solution {
+    private int row;
+    private int col;
+    
+    public int maxAreaOfIsland(int[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+        
+        int group = 2;
+        row = grid.length;
+        col = grid[0].length;
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    int count = dfs(grid, i, j, group);
+                    map.put(group, count);
+                    System.out.println(group + " " + count);
+                    group++;
+                }
+            }
+        }
+        
+        int result = 0;
+        
+        for (int i : map.values()) {
+            // System.out.println("==");
+            result = Math.max(result, i);
+        }
+        return result;
+    }
+    /*Every time when you find a island, you will keep doing dfs to find all its valid neighbour at the first time you visit this unit*/
+    private int dfs(int[][] grid, int i, int j, int group) {
+        int count = 0;
+        if (i < 0 || i >= row || j < 0 || j >= col || grid[i][j] == group || grid[i][j] == 0) {//if neighbour is in same group, skip
+            return count;
+        }
+        grid[i][j] = group;//this current unit has been visited. Change it to current group so that next time if you visit this unit, you can skip.
+        count++;
+        
+        count += dfs(grid, i + 1, j, group);
+        count += dfs(grid, i - 1, j, group);
+        count += dfs(grid, i, j + 1, group);
+        count += dfs(grid, i, j - 1, group);
+        
+        return count;
+    }
+}
